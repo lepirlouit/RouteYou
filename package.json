@@ -1,0 +1,16 @@
+{
+  "name": "routeyou",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "togpx.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "decode-google-map-polyline": "^1.0.1",
+    "xmlbuilder2": "^4.0.3"
+  }
+}
