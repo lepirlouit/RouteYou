@@ -16,7 +16,7 @@ URL="$1"
 OUTPUT="${2:-}"
 
 ROUTE_ID=$(echo "$URL" | grep -oP '(?<=/view/)\d+')
-LANG=$(echo "$URL" | grep -oP '(?<=\.com/)[a-z]+(?=-)')
+LANG=$(echo "$URL" | grep -oP '(?<=\.com/)[a-z]{2}(?=[-/])' || true)
 LANG="${LANG:-fr}"
 
 if [[ -z "$ROUTE_ID" ]]; then
@@ -29,7 +29,7 @@ TMPFILE=$(mktemp /tmp/routeyou-XXXXXX.json)
 trap 'rm -f "$TMPFILE"' EXIT
 
 echo "Fetching page key for route $ROUTE_ID..." >&2
-PAGE_HTML=$(curl -s -H 'User-Agent: Mozilla/5.0' "$URL")
+PAGE_HTML=$(curl -sL -H 'User-Agent: Mozilla/5.0' "$URL")
 API_KEY=$(echo "$PAGE_HTML" | grep -oP '"key":"\K[a-f0-9]+')
 
 if [[ -z "$API_KEY" ]]; then
